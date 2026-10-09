@@ -40,3 +40,11 @@ def post_runs(run : Runs):
     idcount += 1
     runs.append(run)
     return run
+
+@app.delete("/runs/{run_id}")
+def delete_run_fromId(run_id : int):
+    for i in runs:
+        if i.id ==run_id:
+            runs.remove(i)
+            return {"Deleted Run for ID" : run_id}
+    raise HTTPException(status_code=404, detail="run_id not found")
