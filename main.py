@@ -6,11 +6,11 @@ idcount = 1
 
 class RunIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    status : str
-    name : str
+    status: str
+    name: str
 
-class Runs(RunIn):
-        id : int | None = None
+class Run(RunIn):
+    id: int
 
 app = FastAPI()
 
@@ -39,7 +39,7 @@ def get_run_fromId(run_id : int):
 @app.post("/runs", status_code = 201)
 def post_runs(runIn : RunIn):
     global idcount
-    run = Runs(id=idcount, name=runIn.name, status=runIn.status)
+    run = Run(id=idcount, name=runIn.name, status=runIn.status)
     idcount += 1
     runs.append(run)
     return run
